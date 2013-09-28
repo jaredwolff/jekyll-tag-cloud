@@ -46,9 +46,6 @@ module Jekyll
  
       # process parameters
       @params = Hash[*params.split(/(?:: *)|(?:, *)/)]
-
-      puts "Params: #{@params}"
-
       process_font_size(@params['font-size'])
       process_threshold(@params['threshold'])
  
