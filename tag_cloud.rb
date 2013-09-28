@@ -82,9 +82,6 @@ module Jekyll
         weight = (Math.log(count) - Math.log(min))/(Math.log(max) - Math.log(min))
         [name, weight]
       end
- 
-      # shuffle the [tag name, tag weight] pairs
-      weight.sort_by! { rand }
 
       # reduce the Array of [tag name, tag weight] pairs to HTML
       weight.reduce("") do |html, tag|
