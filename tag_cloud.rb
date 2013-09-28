@@ -37,7 +37,7 @@ module Jekyll
     safe = true
  
     # tag cloud variables - these are setup in `initialize`
-    attr_reader :size_min, :size_max, :precision, :unit, :threshold
+    attr_reader :size_min, :size_max, :precision, :unit, :threshold, :attr
  
     def initialize(name, params, tokens)
       # initialize default values
@@ -45,9 +45,11 @@ module Jekyll
       @threshold                              = 1
  
       # process parameters
-      @params = Hash[*params.split(/(?:: *)|(?:, *)/)]
+      @params = Hash[*params.split(/(?:: *)|(?:, *)|(?:, *)/)]
+
       process_font_size(@params['font-size'])
       process_threshold(@params['threshold'])
+      process_attr(@params['class'])
  
       super
     end
@@ -98,6 +100,10 @@ module Jekyll
       /\d*/.match(param) do |m|
         @threshold = m[0].to_i
       end
+    end
+
+    def process_attr(param)
+        @attr = param
     end
   end
 end
