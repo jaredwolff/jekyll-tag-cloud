@@ -59,6 +59,17 @@ module Jekyll
       count = context.registers[:site].tags.map do |name, posts|
         [name, posts.count] if posts.count >= threshold
       end
+
+      # Grab settings from config
+      site = context.registers[:site]
+      tag_dir = site.config['tag_dir']
+      site_url = site.config['url']
+
+      # Grab the tag dir from the configuration file
+      if tag_dir == nil
+        tag_dir = "/tag/"
+      end
+
       # clear nils if any
       count.compact!
 
@@ -80,7 +91,7 @@ module Jekyll
         name, weight = tag
         size = size_min + ((size_max - size_min) * weight).to_f
         size = sprintf("%.#{@precision}f", size)
-        html << "<span class='#{attr}'><a style='font-size: #{size}#{unit}; line-height:#{size}#{unit};' href='/tags.html##{name}'>#{name}</a></span>\n"
+        html << "<span class='#{attr}'><a style='font-size: #{size}#{unit}; line-height:#{size}#{unit};' href='#{site_url}#{tag_dir}#{name}/'>#{name}</a></span>\n"
       end
     end
 
