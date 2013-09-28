@@ -62,13 +62,9 @@ module Jekyll
 
       # Grab settings from config
       site = context.registers[:site]
-      tag_dir = site.config['tag_dir']
-      site_url = site.config['url']
+      tag_dir = site.config['tag_dir'] || "/tag/"
+      site_url = site.config['url'] || ''
 
-      # Grab the tag dir from the configuration file
-      if tag_dir == nil
-        tag_dir = "/tag/"
-      end
 
       # clear nils if any
       count.compact!
