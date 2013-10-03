@@ -65,7 +65,6 @@ module Jekyll
       tag_dir = site.config['tag_dir'] || "/tag/"
       site_url = site.config['url'] || ''
 
-
       # clear nils if any
       count.compact!
 
@@ -75,7 +74,11 @@ module Jekyll
       # map: [[tag name, tag count]] -> [[tag name, tag weight]]
       weight = count.map do |name, count|
         # logarithmic distribution
-        weight = (Math.log(count) - Math.log(min))/(Math.log(max) - Math.log(min))
+        if max == min
+          weight = 1
+        else
+          weight = (Math.log(count) - Math.log(min))/(Math.log(max) - Math.log(min))
+        end
         [name, weight]
       end
 
